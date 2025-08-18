@@ -3,91 +3,108 @@ import datetime
 import random
 
 # ------------------------------
-# 사주 기본 성향 해석
+# 사주풀이 및 운세 생성 로직
 # ------------------------------
-def get_saju_description(year, month, day):
-    zodiac = [
-        "쥐띠 🐭 - 총명하고 재치 있는 성향!",
-        "소띠 🐮 - 성실하고 끈기 있는 성향!",
-        "호랑이띠 🐯 - 용감하고 추진력이 강한 성향!",
-        "토끼띠 🐰 - 온화하고 다정한 성향!",
-        "용띠 🐲 - 카리스마와 리더십이 돋보이는 성향!",
-        "뱀띠 🐍 - 지혜롭고 분석적인 성향!",
-        "말띠 🐴 - 활발하고 자유로운 성향!",
-        "양띠 🐑 - 따뜻하고 배려심 많은 성향!",
-        "원숭이띠 🐵 - 재주 많고 유머러스한 성향!",
-        "닭띠 🐔 - 꼼꼼하고 성실한 성향!",
-        "개띠 🐶 - 의리 있고 정직한 성향!",
-        "돼지띠 🐷 - 너그럽고 긍정적인 성향!"
-    ]
-    zodiac_index = (year - 4) % 12
-    return zodiac[zodiac_index]
 
-
-# ------------------------------
-# 운세 생성
-# ------------------------------
-def generate_fortunes(name, birthdate, birthtime=None):
+def generate_saju(name, birthdate, birthtime=None):
     random.seed(str(name) + str(birthdate) + str(birthtime))
 
+    # 오행 간단 계산 (랜덤 기반 시뮬레이션)
+    elements = ["목(木)", "화(火)", "토(土)", "금(金)", "수(水)"]
+    element_balance = {el: random.randint(1, 5) for el in elements}
+
+    # 성향 설명 (간단 버전)
+    character_desc = random.choice([
+        "리더십이 강하고 주위 사람들을 이끄는 성향을 가지고 있어요.",
+        "섬세하고 감수성이 풍부해 예술적 재능이 돋보여요.",
+        "끈기와 성실함으로 꾸준히 성취하는 타입이에요.",
+        "호기심이 많아 새로운 것에 도전하는 것을 좋아해요.",
+        "사람들과 어울리기를 좋아하지만 혼자만의 시간도 중요시해요."
+    ])
+
+    # 각종 운세
     love_fortune = random.choice([
-        "💖 설레는 인연이 다가올 조짐!",
-        "🌸 기존의 관계가 더 깊어질 운세!",
-        "💌 혼자만의 시간이 필요하지만, 곧 기회가 찾아올 거예요!",
-        "🔮 과거의 인연이 다시 다가올 수 있어요!"
+        "💖 올해는 좋은 인연이 다가올 조짐이 보여요!",
+        "💌 연애보다는 자기계발에 더 집중하면 좋아요!",
+        "🌸 오래 알고 지낸 사람 중에서 인연이 시작될 수 있어요!",
+        "🔮 다가오는 계절에 설레는 만남이 있을 수 있어요!"
     ])
 
     job_fortune = random.choice([
-        "💼 새로운 기회가 열릴 운세!",
-        "📈 꾸준한 노력이 빛을 발하는 시기!",
-        "📚 배움이 곧 성장으로 이어질 거예요!",
-        "🤝 협력과 네트워크가 중요한 시기!"
+        "💼 새로운 기회가 찾아와 성장할 수 있는 시기예요!",
+        "📈 꾸준히 하던 일에서 인정을 받을 수 있어요!",
+        "📚 도전이 필요하지만 성과가 크지 않을 수 있어요.",
+        "🤝 협력과 팀워크가 중요한 시기예요!"
     ])
 
     money_fortune = random.choice([
-        "💰 재물이 모이고 운이 상승해요!",
-        "🪙 작은 투자에 신중해야 해요!",
-        "🍀 뜻밖의 행운이 재정에 도움을 줘요!",
-        "📉 소비를 조심해야 하는 시기예요!"
+        "💰 뜻밖의 재물이 들어올 수 있어요!",
+        "🪙 씀씀이를 줄이는 것이 좋을 시기예요.",
+        "🏦 투자보다는 저축이 더 유리해요.",
+        "💎 주변 사람을 통해 금전적 기회가 찾아올 수 있어요!"
     ])
 
     health_fortune = random.choice([
-        "💪 활력이 넘치는 하루!",
-        "🧘‍♀️ 균형 있는 생활이 필요해요!",
-        "🌿 스트레스 조절이 중요해요!",
-        "😴 충분한 휴식이 필요할 때예요!"
+        "🍀 건강운이 좋아 에너지가 넘쳐나요!",
+        "😴 충분한 휴식이 필요해요.",
+        "🥗 식습관 관리에 신경 쓰면 좋아요.",
+        "🏃‍♂️ 운동을 꾸준히 하면 좋은 결과가 있어요!"
     ])
 
-    advice = random.choice([
-        "🍀 긍정적인 태도가 행운을 불러올 거예요!",
-        "🌙 감정의 균형을 잘 잡으면 좋은 일이 생겨요!",
-        "🚀 도전의 시도를 두려워하지 마세요!",
-        "🌿 주변 사람과의 유대가 복을 가져와요!"
+    relationship_fortune = random.choice([
+        "👫 새로운 인맥이 생겨 삶에 활기를 불어넣을 거예요.",
+        "🤗 가까운 사람과의 관계를 돌아보면 좋아요.",
+        "💬 말실수에 주의하면 인간관계가 원만해져요.",
+        "🎉 모임이나 행사에서 좋은 인연을 만날 수 있어요!"
     ])
 
     # 연애 시기 예측
     love_timing = random.choice([
-        "📅 앞으로 3개월 이내에 새로운 인연이 다가올 수 있어요!",
-        "📅 올해 가을쯤 설레는 만남이 예상돼요!",
-        "📅 내년 초, 뜻밖의 인연이 찾아올 거예요!",
-        "📅 아직은 스스로를 가꾸는 시간이 필요해요. 1~2년 뒤 좋은 인연이 다가와요!"
+        "다가오는 봄에 설레는 만남이 있을 수 있어요 🌸",
+        "여름 무렵 뜨거운 인연이 찾아올 수 있어요 ☀️",
+        "올해 말쯤 인연의 기운이 강해질 거예요 🎄",
+        "내년 초에 진지한 만남이 다가올 수 있어요 🌟"
     ])
 
-    return love_fortune, job_fortune, money_fortune, health_fortune, advice, love_timing
+    # 해야 할 것 / 피해야 할 것
+    do_good = random.choice([
+        "📖 꾸준히 공부하거나 자기계발을 하면 운이 트여요.",
+        "🤝 주변 사람들을 돕는 마음을 가지면 좋은 기운이 들어와요.",
+        "🌿 자연과 가까이 지내면 마음이 안정되고 길운이 와요.",
+        "🧘‍♀️ 차분히 계획을 세우고 실천하면 성과가 커져요."
+    ])
 
+    do_bad = random.choice([
+        "⚡ 충동적인 결정은 피하는 게 좋아요.",
+        "💸 큰 돈을 갑자기 쓰는 것은 좋지 않아요.",
+        "🗣️ 불필요한 말로 오해를 사지 않도록 주의하세요.",
+        "😴 게으름에 빠지면 기회를 놓칠 수 있어요."
+    ])
+
+    return {
+        "element_balance": element_balance,
+        "character_desc": character_desc,
+        "love": love_fortune,
+        "job": job_fortune,
+        "money": money_fortune,
+        "health": health_fortune,
+        "relationship": relationship_fortune,
+        "love_timing": love_timing,
+        "do_good": do_good,
+        "do_bad": do_bad
+    }
 
 # ------------------------------
 # Streamlit UI
 # ------------------------------
-st.set_page_config(page_title="사주 & 운세 웹", page_icon="🔮", layout="centered")
+st.set_page_config(page_title="정통 사주풀이", page_icon="📜", layout="centered")
 
-# CSS 꾸미기
 st.markdown("""
     <style>
-        .main { background-color: #FFF5F7; }
+        .main { background-color: #FFFDF6; }
         .title {
-            font-size: 2.2em;
-            color: #FF6F91;
+            font-size: 2.5em;
+            color: #C85C5C;
             text-align: center;
             font-weight: bold;
         }
@@ -113,37 +130,48 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # 제목
-st.markdown('<div class="title">🔮 나의 사주 & 운세 보기 🔮</div>', unsafe_allow_html=True)
+st.markdown('<div class="title">📜 정통 사주풀이 & 운세 📜</div>', unsafe_allow_html=True)
 
-# 입력값
+# 입력폼
 name = st.text_input("이름을 입력하세요:")
 birthdate = st.date_input("생년월일을 선택하세요:", datetime.date(2000, 1, 1))
-birthtime_option = st.selectbox("태어난 시간을 선택하세요 (모르면 '모름' 선택)", 
-                                ["모름", "자시(23~1시)", "축시(1~3시)", "인시(3~5시)", "묘시(5~7시)", 
-                                 "진시(7~9시)", "사시(9~11시)", "오시(11~13시)", "미시(13~15시)", 
-                                 "신시(15~17시)", "유시(17~19시)", "술시(19~21시)", "해시(21~23시)"])
+birthtime = st.selectbox("태어난 시간을 선택하세요 (모르면 '모름' 선택)", 
+                         ["모름", "자시(23~01시)", "축시(01~03시)", "인시(03~05시)", 
+                          "묘시(05~07시)", "진시(07~09시)", "사시(09~11시)", 
+                          "오시(11~13시)", "미시(13~15시)", "신시(15~17시)", 
+                          "유시(17~19시)", "술시(19~21시)", "해시(21~23시)"])
 
-if st.button("✨ 운세 보기 ✨"):
+if st.button("🔮 사주풀이 보기"):
     if name.strip() == "":
         st.warning("이름을 입력해주세요!")
     else:
-        # 사주 설명
-        saju = get_saju_description(birthdate.year, birthdate.month, birthdate.day)
-        love, job, money, health, advice, love_timing = generate_fortunes(name, birthdate, birthtime_option)
+        result = generate_saju(name, birthdate, birthtime)
+
+        # 카드 레이아웃 출력
+        st.markdown(f"""
+            <div class="card">
+                <div class="subtitle">✨ {name}님의 사주풀이 ✨</div>
+                <div class="fortune-text"><b>🌟 성향:</b> {result['character_desc']}</div>
+                <div class="fortune-text"><b>🌳 오행의 균형:</b> {result['element_balance']}</div>
+            </div>
+        """, unsafe_allow_html=True)
 
         st.markdown(f"""
             <div class="card">
-                <div class="subtitle">🌟 {name}님의 사주 기본 성향</div>
-                <div class="fortune-text">{saju}</div>
+                <div class="subtitle">📌 운세 해석</div>
+                <div class="fortune-text"><b>💖 연애운:</b> {result['love']}</div>
+                <div class="fortune-text"><b>💼 직업운:</b> {result['job']}</div>
+                <div class="fortune-text"><b>💰 재물운:</b> {result['money']}</div>
+                <div class="fortune-text"><b>🍀 건강운:</b> {result['health']}</div>
+                <div class="fortune-text"><b>🤝 인간관계운:</b> {result['relationship']}</div>
+                <div class="fortune-text"><b>📅 연애 시기:</b> {result['love_timing']}</div>
             </div>
+        """, unsafe_allow_html=True)
 
+        st.markdown(f"""
             <div class="card">
-                <div class="subtitle">✨ 오늘의 운세 ✨</div>
-                <div class="fortune-text"><b>💖 연애운:</b> {love}</div>
-                <div class="fortune-text"><b>💼 직업운:</b> {job}</div>
-                <div class="fortune-text"><b>💰 재물운:</b> {money}</div>
-                <div class="fortune-text"><b>🩺 건강운:</b> {health}</div>
-                <div class="fortune-text"><b>💌 연애 시기 예측:</b> {love_timing}</div>
-                <div class="fortune-text"><b>🌟 오늘의 조언:</b> {advice}</div>
+                <div class="subtitle">⚖️ 생활 조언</div>
+                <div class="fortune-text"><b>✅ 하면 좋은 것:</b> {result['do_good']}</div>
+                <div class="fortune-text"><b>❌ 피해야 할 것:</b> {result['do_bad']}</div>
             </div>
         """, unsafe_allow_html=True)
