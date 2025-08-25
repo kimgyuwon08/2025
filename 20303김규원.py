@@ -39,13 +39,12 @@ st.markdown("""
     }
     .subject-box {
         display: inline-block;
-        background: #e8f0fe;
-        border-radius: 8px;
+        border-radius: 6px;
         padding: 2px 6px;
         margin: 2px;
         font-size: 12px;
         font-weight: bold;
-        color: #1a73e8;
+        color: white;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -63,6 +62,19 @@ daily_study_hours = st.sidebar.slider("하루 공부 가능 시간 (시간)", 1,
 st.sidebar.markdown("### 과목별 자신감/난이도 비율 (0~5)")
 subjects = ["국어", "영어", "수학", "과학", "사회", 
             "생활과윤리", "한국지리", "생활과과학", "사회문제탐구"]
+
+# 🎨 과목별 색상 매핑
+subject_colors = {
+    "국어": "#e74c3c",       # 빨강
+    "영어": "#3498db",       # 파랑
+    "수학": "#2ecc71",       # 초록
+    "과학": "#9b59b6",       # 보라
+    "사회": "#f39c12",       # 주황
+    "생활과윤리": "#1abc9c",  # 청록
+    "한국지리": "#e67e22",    # 진한 주황
+    "생활과과학": "#34495e",  # 남색
+    "사회문제탐구": "#d35400" # 갈색
+}
 
 weights = {}
 for subj in subjects:
@@ -124,7 +136,7 @@ if st.sidebar.button("✏️ 스케줄 생성하기"):
                     hours_left -= assign_h
 
         # ---------------------------
-        # 📅 달력 표시
+        # 📅 달력 표시 (과목별 색상)
         # ---------------------------
         def make_calendar(schedule_dict):
             start_date = min(schedule_dict.keys())
@@ -144,7 +156,8 @@ if st.sidebar.button("✏️ 스케줄 생성하기"):
                 day_num = date.day
                 cell_html = f"<b>{day_num}</b><br>"
                 for subj, h in schedule_dict[date]:
-                    cell_html += f"<div class='subject-box'>{subj} {h}h</div><br>"
+                    color = subject_colors.get(subj, "#95a5a6")
+                    cell_html += f"<div class='subject-box' style='background:{color}'>{subj} {h}h</div><br>"
                 html += f"<td>{cell_html}</td>"
 
                 if (start_weekday + i + 1) % 7 == 0:
