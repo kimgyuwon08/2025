@@ -67,8 +67,7 @@ if st.button("📌 스케줄 생성하기"):
 
     # 날짜별 분배
     day_plan = {today + datetime.timedelta(days=i): [] for i in range(total_days)}
-    subj_iter = schedule_df.itertuples(index=False)
-    subj_dict = {s.subject: s._asdict()["총 공부시간(h)"] for s in subj_iter}
+    subj_dict = dict(zip(schedule_df["subject"], schedule_df["총 공부시간(h)"]))  # ✅ 딕셔너리 변환 방식 수정
 
     # 균등 분배
     while any(v > 0 for v in subj_dict.values()):
